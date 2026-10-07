@@ -9,18 +9,18 @@ class Board:
     def reset(self,height,width):
         self.height = height
         self.width = width
-        self.board = [[" " for _ in range(width)] for _ in range(height)]
+        self.board = [[False for _ in range(width)] for _ in range(height)]
 
     def print_board(self):
         for row in self.board:
-            print(*row, sep = " ")
+            print(*("■" if cell else " " for cell in row), sep = " ")
 
     def random_board(self,height,width):
         self.reset(height,width)
         for r in range(self.height):
             for c in range(self.width):
                 alive_or_dead = random.randint(0,1)
-                self.board[r][c] = "■" if alive_or_dead == 1 else " "
+                self.board[r][c] = True if alive_or_dead == 1 else False
 
     def cell_state(self,r,c):
         alive_neighbors = 0
@@ -29,21 +29,21 @@ class Board:
                 if (i,j) == (r,c) or i < 0 or i >= self.height or j < 0 or j >= self.width:
                     continue
 
-                if self.board[i][j] == "■":
+                if self.board[i][j]:
                     alive_neighbors += 1
 
-        if self.board[r][c] == " ":
+        if not self.board[r][c]:
             if alive_neighbors in self.birth_nums:
-                return "■"
+                return True
             else:
-                return " "
+                return False
 
         else:
             if alive_neighbors not in self.survive_nums:
-                return " "
+                return False
             
             else:
-                return "■"
+                return True
 
 
     def next_board_state(self):
