@@ -20,7 +20,7 @@ class Board:
         for r in range(self.height):
             for c in range(self.width):
                 alive_or_dead = random.randint(0,1)
-                self.board[r][c] = "■" if alive_or_dead == 1 else "■"
+                self.board[r][c] = "■" if alive_or_dead == 1 else " "
 
     def cell_state(self,r,c):
         alive_neighbors = 0
@@ -54,15 +54,16 @@ class Board:
 
         self.board = new_state
 
+    def run(self,runs=10):
+        for _ in range(runs):
+            print("Next:")
+            self.next_board_state()
+            self.print_board()
+
 
 if __name__ == "__main__":
     board = Board(3,3)
-    board.board = [["■","■","■"],["■","■","■"],["■","■","■"]]
-    board.print_board()
-
-
-    print("Next:")
-    board.next_board_state()
-    board.print_board()
+    board.random_board(3,3)
+    board.run()
 
     
