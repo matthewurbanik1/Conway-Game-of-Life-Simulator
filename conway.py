@@ -64,6 +64,7 @@ class Board:
 if __name__ == "__main__":
     board = Board(3,3)
     board.random_board(3,3)
+    board.print_board()
     board.run()
 
     
