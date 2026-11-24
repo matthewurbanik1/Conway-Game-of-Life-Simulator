@@ -1,7 +1,7 @@
 import random
 
 class Board:
-    def __init__(self, length, width):
+    def __init__(self, length=3, width=3):
         self.reset(length,width)
         self.birth_nums = [3]
         self.survive_nums = [2,3]
@@ -10,6 +10,13 @@ class Board:
         self.height = height
         self.width = width
         self.board = [[False for _ in range(width)] for _ in range(height)]
+
+    def is_empty(self):
+        for row in self.board:
+            for cell in row:
+                if cell:
+                    return False
+        return True
 
     def print_board(self):
         for row in self.board:
@@ -45,7 +52,6 @@ class Board:
             else:
                 return True
 
-
     def next_board_state(self):
         new_state = [[False for _ in range(self.height)] for _ in range(self.width)]
         for r in range(self.height):
@@ -59,10 +65,11 @@ class Board:
             print("Next:")
             self.next_board_state()
             self.print_board()
-
+            if self.is_empty():
+                break
 
 if __name__ == "__main__":
-    board = Board(3,3)
+    board = Board()
     board.random_board(3,3)
     board.print_board()
     board.run()
