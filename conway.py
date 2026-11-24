@@ -75,16 +75,22 @@ class Board:
         1. Run Random Board
         2. Set Board Size
         """)
-        menu_choice = int(input())
-        match menu_choice:
-            case 1:
-                board.random_board()
-                board.run()
-            case 2:
-                print("Please enter 2 integers seperated by a space (Ex. 3 3)")
-                board_size = input()
-                board.height, board.width = (int(board_size[0]), int(board_size[2]))
-                print("Board size set to", board.height, "x", board.width)
+        try:
+            menu_choice = int(input())
+            match menu_choice:
+                case 1:
+                    board.random_board()
+                    board.run()
+                case 2:
+                    print("Please enter 2 integers seperated by a space (Ex. 3 3)")
+                    try:
+                        board_size = input()
+                        board.height, board.width = (int(board_size[0]), int(board_size[2]))
+                        print("Board size set to", board.height, "x", board.width)
+                    except:
+                        print("Invalid input.")
+        except:
+            print("Please input an integer 1-2.")
 
 if __name__ == "__main__":
     board = Board()
